@@ -521,6 +521,33 @@ footer{padding:48px 0;background:#514642;color:#fff}footer .wrap{display:flex;ju
   .reward-marquee-card{width:190px;min-width:190px}
   .reward-marquee-img{height:132px}
 }
+
+/* Local mirror: keep the complete navigation usable on phones. */
+@media (max-width: 960px) {
+  .nav {
+    height: auto;
+    min-height: 72px;
+    padding: 10px 0;
+    flex-wrap: wrap;
+  }
+  .nav-links {
+    display: flex;
+    order: 3;
+    width: 100%;
+    overflow-x: auto;
+    gap: 4px;
+    padding: 4px 0 8px;
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+  }
+  .nav-links .nav-link,
+  .nav-links .contact-btn {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+  .mobile-note { display: none; }
+  .dropdown-menu { display: none; }
+}
 </style>
 </head>
 <body>

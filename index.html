@@ -634,7 +634,8 @@ footer{padding:48px 0;background:#514642;color:#fff}footer .wrap{display:flex;ju
 }
 
 
-/* Local mirror: keep the complete navigation usable on phones. */
+/* Local mirror: hamburger navigation for phones. */
+.mobile-menu-toggle { display: none; }
 @media (max-width: 960px) {
   .nav {
     height: auto;
@@ -642,20 +643,35 @@ footer{padding:48px 0;background:#514642;color:#fff}footer .wrap{display:flex;ju
     padding: 10px 0;
     flex-wrap: wrap;
   }
+  .mobile-menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 42px;
+    margin-left: auto;
+    border: 0;
+    border-radius: 12px;
+    background: rgba(184,166,207,.22);
+    color: #685477;
+    font-size: 24px;
+    cursor: pointer;
+  }
   .nav-links {
-    display: flex;
+    display: none;
     order: 3;
     width: 100%;
-    overflow-x: auto;
-    gap: 4px;
-    padding: 4px 0 8px;
-    scrollbar-width: thin;
-    -webkit-overflow-scrolling: touch;
+    flex-direction: column;
+    gap: 2px;
+    padding: 8px 0;
   }
+  .nav-links.is-open { display: flex; }
+  .nav-item { width: 100%; }
   .nav-links .nav-link,
   .nav-links .contact-btn {
-    flex: 0 0 auto;
-    white-space: nowrap;
+    width: 100%;
+    justify-content: flex-start;
+    white-space: normal;
   }
   .mobile-note { display: none; }
   .dropdown-menu { display: none; }
@@ -669,7 +685,7 @@ footer{padding:48px 0;background:#514642;color:#fff}footer .wrap{display:flex;ju
     <a class="brand" href="index.html">
       <img class="site-logo" src="assets/logo.jpg" alt="熟齡生活 成長俱樂部 Logo">
     </a>
-    <nav class="nav-links">
+    <button class="mobile-menu-toggle" type="button" aria-label="開啟選單" aria-expanded="false">☰</button><nav class="nav-links">
       <a class="nav-link active" href="index.html">首頁</a>
       <div class="nav-item">
         <a class="nav-link nav-trigger " href="about.html">關於我們</a>
@@ -854,5 +870,16 @@ function openLineFromForm(event,type){
 </script>
 
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"6cdf032cca954d91bffd634cecc770c1","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+
+<script>
+document.querySelectorAll('.mobile-menu-toggle').forEach((button) => {
+  button.addEventListener('click', () => {
+    const menu = button.parentElement.querySelector('.nav-links');
+    const opened = menu.classList.toggle('is-open');
+    button.setAttribute('aria-expanded', String(opened));
+    button.setAttribute('aria-label', opened ? '關閉選單' : '開啟選單');
+  });
+});
+</script>
 </body>
 </html>
